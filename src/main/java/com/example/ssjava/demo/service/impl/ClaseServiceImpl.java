@@ -4,7 +4,6 @@ import com.example.ssjava.demo.entity.ClaseEntity;
 import com.example.ssjava.demo.repository.ClaseRepository;
 import com.example.ssjava.demo.service.ClasesService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.Optional;
 @Service
 public class ClaseServiceImpl implements ClasesService {
 
-    @Autowired
     private ClaseRepository claseRepository;
 
     @Override

@@ -16,13 +16,10 @@ public class ExamenEntity {
     private int idExamen;
 
     @Column(nullable = false, length = 200)
-    private String preguntas;
+    private String titulo;
 
     @Column(nullable = false, length = 200)
-    private String respuestas;
-
-    @Column(nullable = false)
-    private int numeroCorrecto;
+    private String contenido;
 
     @OneToOne
     @JoinColumn(name = "id_curso", unique = true, nullable = false)
