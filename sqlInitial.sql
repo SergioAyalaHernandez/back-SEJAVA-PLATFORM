@@ -25,6 +25,7 @@ CREATE TABLE clases (
     id_clase INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     profesor VARCHAR(25) NOT NULL,
     contenido VARCHAR(255) NOT NULL,
+    link_clase VARCHAR(255) NOT NULL,
     jsonEjemplo TEXT,
     ejemplos_codigo TEXT
 );
@@ -44,10 +45,9 @@ CREATE TABLE cursos (
 -- Tabla examen
 CREATE TABLE examen (
     id_examen INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    preguntas VARCHAR(200) NOT NULL,
-    respuestas VARCHAR(200) NOT NULL,
+    titulo VARCHAR(200) NOT NULL,
+    contenido VARCHAR(200) NOT NULL,
     id_curso INT NOT NULL UNIQUE, -- Relación 1N1 con cursos
-    numero_correcto INT NOT NULL,
     FOREIGN KEY (id_curso) REFERENCES cursos(id_cursos)
 );
 
@@ -84,20 +84,21 @@ INSERT INTO plan (tipo_plan) VALUES
 ('advance');
 
 -- Insertar datos en la tabla clases
-INSERT INTO clases (profesor, contenido, jsonEjemplo, ejemplos_codigo) VALUES
-('Sergio Ayala', 'Introducción a JPA', '{"title": "JPA Basics", "description": "This is an example of JPA basics"}', 'public class JPAExample { }'),
-('Santiago Pereira', 'Configuración de Spring Data JPA', '{"title": "Spring Data JPA", "description": "Example configuration for Spring Data JPA"}', 'public class SpringDataJPAConfig { }'),
-('Santiago Pereira', 'Manejo de Excepciones en Java', '{"title": "Java Exception Handling", "description": "Examples of handling exceptions in Java"}', 'public class JavaExceptionHandling { }');
+INSERT INTO clases (profesor, contenido,link_clase, jsonEjemplo, ejemplos_codigo) VALUES
+('Sergio Ayala', 'Introducción a JPA','a', '{"title": "JPA Basics", "description": "This is an example of JPA basics"}', 'public class JPAExample { }'),
+('Santiago Pereira', 'Configuración de Spring Data JPA','a', '{"title": "Spring Data JPA", "description": "Example configuration for Spring Data JPA"}', 'public class SpringDataJPAConfig { }'),
+('Santiago Pereira', 'Manejo de Excepciones en Java','a', '{"title": "Java Exception Handling", "description": "Examples of handling exceptions in Java"}', 'public class JavaExceptionHandling { }');
 
 INSERT INTO cursos (nombre, descripcion, id_clase, id_plan) VALUES
 ('jpaJava', 'Curso sobre JPA en Java', 1, 1),
 ('microserviciosRestJava', 'Curso sobre microservicios REST en Java', 2, 2),
 ('javaSE', 'Curso sobre Java SE', 3, 3);
 
-INSERT INTO examen (preguntas, respuestas, id_curso, numero_correcto) VALUES
-('Preguntas JPA', 'Respuestas JPA', 1, 0),
-('Preguntas Microservicios', 'Respuestas Microservicios', 2, 0),
-('Preguntas Java SE', 'Respuestas Java SE', 3, 0);
+
+INSERT INTO examen (titulo, contenido, id_curso) VALUES
+('Preguntas JPA', 'Este exámen contendrá información vista en nuestro curso de jpa', 1),
+('Preguntas Microservicios', 'Este exámen contendrá información vista en nuestro curso de Microservicios', 2),
+('Preguntas Java SE', 'Este exámen contendrá información vista en nuestro curso de Java SE', 3);
 
 
 INSERT INTO pregunta (descripcion,  id_examen) VALUES
