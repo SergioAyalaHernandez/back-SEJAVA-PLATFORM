@@ -18,9 +18,6 @@ public class PreguntaEntity {
     @Column(nullable = false, length = 255)
     private String descripcion;
 
-    @Column(nullable = false)
-    private boolean correcta;
-
     @OneToOne
     @JoinColumn(name = "id_examen", unique = true, nullable = false)
     private ExamenEntity examen;

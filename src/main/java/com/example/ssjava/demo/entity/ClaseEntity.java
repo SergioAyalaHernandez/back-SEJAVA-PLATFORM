@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
-
 
 @Entity
 @Getter
@@ -20,11 +18,11 @@ public class ClaseEntity {
     @Column(nullable = false, length = 25)
     private String profesor;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String contenido;
 
-    @Lob
-    private String jsonEjemplo;
+    @Column(nullable = false, name = "link_clase")
+    private String linkClase;
 
     @Lob
     private String ejemplosCodigo;
