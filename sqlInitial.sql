@@ -78,6 +78,19 @@ CREATE TABLE resultado_examen (
     FOREIGN KEY (id_examen) REFERENCES examen(id_examen)
 );
 
+CREATE TABLE respuestas_alumno (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_respuesta INT NOT NULL,
+    id_pregunta INT NOT NULL,
+    id_examen INT NOT NULL,
+    id_resultado_examen INT NOT NULL,
+    FOREIGN KEY (id_respuesta) REFERENCES respuestas(id_respuesta),
+    FOREIGN KEY (id_pregunta) REFERENCES pregunta(id_pregunta),
+    FOREIGN KEY (id_examen) REFERENCES examen(id_examen),
+    FOREIGN KEY (id_resultado_examen) REFERENCES resultado_examen(id_resultado)
+);
+
+
 INSERT INTO plan (tipo_plan) VALUES
 ('basic'),
 ('medium'),
