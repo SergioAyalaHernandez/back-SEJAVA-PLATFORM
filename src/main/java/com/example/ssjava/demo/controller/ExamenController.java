@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/examenes")
 public class ExamenController {
 

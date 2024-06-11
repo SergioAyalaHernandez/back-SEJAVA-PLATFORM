@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/respuestas")
 public class RespuestaController {
 
