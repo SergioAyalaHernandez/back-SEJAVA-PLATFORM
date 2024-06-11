@@ -84,6 +84,7 @@ CREATE TABLE respuestas_alumno (
     id_pregunta INT NOT NULL,
     id_examen INT NOT NULL,
     id_resultado_examen INT NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_respuesta) REFERENCES respuestas(id_respuesta),
     FOREIGN KEY (id_pregunta) REFERENCES pregunta(id_pregunta),
     FOREIGN KEY (id_examen) REFERENCES examen(id_examen),

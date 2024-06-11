@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -21,5 +24,8 @@ public class ResultadoExamen {
     @ManyToOne
     @JoinColumn(name = "id_examen", nullable = false)
     private ExamenEntity examen;
+    @Column(name = "fecha_creacion", nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime fechaCreacion;
     private Float resultado;
 }

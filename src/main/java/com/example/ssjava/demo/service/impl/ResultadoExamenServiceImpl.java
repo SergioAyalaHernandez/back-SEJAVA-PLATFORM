@@ -9,6 +9,7 @@ import com.example.ssjava.demo.service.ResultadoExamenService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +39,7 @@ public class ResultadoExamenServiceImpl implements ResultadoExamenService {
             if (examenEntity.isPresent()) {
                 float calificacion = guardarNotas(resultadoExamen, examenEntity, examenBase);
                 examenBase.setResultado(calificacion/10);
+                examenBase.setFechaCreacion(LocalDateTime.now());
                 resultadoExamenRepository.save(examenBase);
                 return examenBase;
             } else {
