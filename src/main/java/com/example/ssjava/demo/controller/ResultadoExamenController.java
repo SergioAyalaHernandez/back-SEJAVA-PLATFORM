@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
@@ -28,4 +30,14 @@ public class ResultadoExamenController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<List<ResultadoExamen>> getAllResultById(@PathVariable Long id) {
+        List<ResultadoExamen> resultados = resultadoExamenService.getAllResultById(id);
+        if (resultados.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(resultados, HttpStatus.OK);
+    }
+
 }

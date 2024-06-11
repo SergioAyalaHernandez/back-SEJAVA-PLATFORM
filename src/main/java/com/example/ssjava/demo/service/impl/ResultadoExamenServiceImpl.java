@@ -9,6 +9,7 @@ import com.example.ssjava.demo.service.ResultadoExamenService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,5 +88,8 @@ public class ResultadoExamenServiceImpl implements ResultadoExamenService {
         }
     }
 
-
+    @Override
+    public List<ResultadoExamen> getAllResultById(Long id) {
+        return resultadoExamenRepository.findAllByPersona_IdPersona(id);
+    }
 }
