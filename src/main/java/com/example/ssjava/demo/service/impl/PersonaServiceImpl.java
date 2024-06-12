@@ -5,6 +5,7 @@ import com.example.ssjava.demo.repository.PersonaRepository;
 import com.example.ssjava.demo.service.PersonaService;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 public class PersonaServiceImpl implements PersonaService {
 
     private final PersonaRepository personaRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<PersonaEntity> getAllPerson() {
@@ -26,6 +28,8 @@ public class PersonaServiceImpl implements PersonaService {
 
     @Override
     public PersonaEntity createPerson(PersonaEntity persona) {
+        String encodedPassword = passwordEncoder.encode(persona.getPassword());
+        persona.setPassword(encodedPassword);
         return personaRepository.save(persona);
     }
 
