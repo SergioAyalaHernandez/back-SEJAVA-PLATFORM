@@ -1,6 +1,7 @@
 package com.example.ssjava.demo.service.impl;
 
 import com.example.ssjava.demo.entity.PersonaEntity;
+import com.example.ssjava.demo.excepciones.BadRequestException;
 import com.example.ssjava.demo.repository.PersonaRepository;
 import com.example.ssjava.demo.service.PersonaService;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,10 @@ public class PersonaServiceImpl implements PersonaService {
 
     @Override
     public PersonaEntity createPerson(PersonaEntity persona) {
+        String email = persona.getEmail();
+        if (personaRepository.findByEmail(email).isPresent()) {
+            throw new BadRequestException("El correo electrónico ya está registrado");
+        }
         String encodedPassword = passwordEncoder.encode(persona.getPassword());
         persona.setPassword(encodedPassword);
         return personaRepository.save(persona);

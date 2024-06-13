@@ -26,17 +26,18 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+        http
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST,"/api/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("A", "E")
+                        .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("A", "E", "P")
                         .requestMatchers(HttpMethod.PUT).hasRole("A")
                         .requestMatchers("/api/orders/**").hasRole("A")
                         .requestMatchers(HttpMethod.POST, "/api/personas").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/api/auth/**", "/api/personas")
+                        .ignoringRequestMatchers("/api/auth/**", "/api/**")
                 )
                 .addFilterBefore(jwtFilter, BasicAuthenticationFilter.class);
 

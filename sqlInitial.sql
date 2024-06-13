@@ -26,7 +26,7 @@ CREATE TABLE clases (
     profesor VARCHAR(25) NOT NULL,
     contenido VARCHAR(255) NOT NULL,
     link_clase VARCHAR(255) NOT NULL,
-    jsonEjemplo TEXT,
+    json_ejemplo TEXT,
     ejemplos_codigo TEXT
 );
 
@@ -98,10 +98,15 @@ INSERT INTO plan (tipo_plan) VALUES
 ('advance');
 
 -- Insertar datos en la tabla clases
-INSERT INTO clases (profesor, contenido,link_clase, jsonEjemplo, ejemplos_codigo) VALUES
-('Sergio Ayala', 'Introducción a JPA','a', '{"title": "JPA Basics", "description": "This is an example of JPA basics"}', 'public class JPAExample { }'),
-('Santiago Pereira', 'Configuración de Spring Data JPA','a', '{"title": "Spring Data JPA", "description": "Example configuration for Spring Data JPA"}', 'public class SpringDataJPAConfig { }'),
-('Santiago Pereira', 'Manejo de Excepciones en Java','a', '{"title": "Java Exception Handling", "description": "Examples of handling exceptions in Java"}', 'public class JavaExceptionHandling { }');
+INSERT INTO clases (profesor, contenido, link_clase, json_ejemplo, ejemplos_codigo)
+VALUES
+('Sergio Ayala', 'Introducción a JPA', 'a', '{"title": "JPA Basics", "description": "This is an example of JPA basics"}', 'import javax.persistence.EntityManager;\nimport javax.persistence.EntityManagerFactory;\nimport javax.persistence.Persistence;\n\npublic class JPAExample {\n    public static void main(String[] args) {\n        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU_NAME");\n        EntityManager em = emf.createEntityManager();\n\n        // Código de ejemplo de JPA\n        try {\n            em.getTransaction().begin();\n\n            // Aquí va el código de persistencia y consultas\n\n            em.getTransaction().commit();\n        } catch (Exception e) {\n            e.printStackTrace();\n            em.getTransaction().rollback();\n        } finally {\n            em.close();\n            emf.close();\n        }\n    }\n}'
+),
+('Santiago Pereira', 'Configuración de Spring Data JPA', 'a', '{"title": "Spring Data JPA", "description": "Example configuration for Spring Data JPA"}', '@Configuration\n@EnableJpaRepositories(basePackages = "com.example.repositories")\n@EnableTransactionManagement\npublic class SpringDataJPAConfig {\n\n    @Bean\n    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {\n        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();\n        em.setDataSource(dataSource());\n        em.setPackagesToScan("com.example.models");\n\n        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();\n        em.setJpaVendorAdapter(vendorAdapter);\n\n        return em;\n    }\n\n    // Otros métodos de configuración\n}'
+),
+('Santiago Pereira', 'Manejo de Excepciones en Java', 'a', '{"title": "Java Exception Handling", "description": "Examples of handling exceptions in Java"}', 'public class JavaExceptionHandling {\n\n    public static void main(String[] args) {\n        try {\n            // Código que puede lanzar excepciones\n            int resultado = 10 / 0; // Esto provocará una excepción de división por cero\n        } catch (Exception e) {\n            System.err.println("Error: " + e.getMessage());\n        } finally {\n            // Código a ejecutar siempre\n            System.out.println("Cierre del programa.");\n        }\n    }\n}'
+);
+
 
 INSERT INTO cursos (nombre, descripcion, id_clase, id_plan) VALUES
 ('jpaJava', 'Curso sobre JPA en Java', 1, 1),
@@ -283,14 +288,3 @@ INSERT INTO respuestas (id_pregunta, respuesta, es_correcta) VALUES
 (30, 'Es un componente de Java que gestiona la memoria de la JVM', false);
 
 
-INSERT INTO persona (nombres, apellidos, email, password, celular, plan_FK, tipo_usuario) VALUES
-('Juan', 'Perez', 'juan.perez@example.com', 'password123', '1234567890', 1, 'E'),
-('María', 'González', 'maria.gonzalez@example.com', 'pass456', '9876543210', 2, 'E'),
-('Pedro', 'Martínez', 'pedro.martinez@example.com', 'securepwd', '4567890123', 1, 'E'),
-('Laura', 'López', 'laura.lopez@example.com', 'strongpwd', '7890123456', 3, 'E'),
-('Diego', 'Hernández', 'diego.hernandez@example.com', 'safe123', '3210987654', 2, 'E'),
-('Ana', 'Díaz', 'ana.diaz@example.com', 'pwd1234', '6543210987', 1, 'E'),
-('Carlos', 'Sánchez', 'carlos.sanchez@example.com', 'passpass', '0123456789', 3, 'E'),
-('Sofía', 'Ramírez', 'sofia.ramirez@example.com', 'securepass', '9876543210', 1, 'E'),
-('Jorge', 'Gómez', 'jorge.gomez@example.com', 'strongpwd', '4567890123', 2, 'E'),
-('Valentina', 'Torres', 'valentina.torres@example.com', 'safepwd', '1234567890', 3, 'E');
