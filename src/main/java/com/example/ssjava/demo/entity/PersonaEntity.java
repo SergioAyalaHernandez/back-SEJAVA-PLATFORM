@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -32,6 +34,9 @@ public class PersonaEntity {
 
     @Column(nullable = false, length = 1)
     private String tipoUsuario;
+
+    @Column(name = "fecha_creacion", nullable = false, updatable = false)
+    private LocalDateTime fechaCreacion;
 
     @ManyToOne
     @JoinColumn(name = "plan_FK", nullable = false)

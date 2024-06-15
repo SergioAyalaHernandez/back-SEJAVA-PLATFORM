@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
@@ -35,6 +36,7 @@ public class PersonaServiceImpl implements PersonaService {
         }
         String encodedPassword = passwordEncoder.encode(persona.getPassword());
         persona.setPassword(encodedPassword);
+        persona.setFechaCreacion(LocalDateTime.now());
         return personaRepository.save(persona);
     }
 

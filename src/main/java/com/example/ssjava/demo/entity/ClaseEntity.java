@@ -24,9 +24,9 @@ public class ClaseEntity {
     @Column(nullable = false, name = "link_clase")
     private String linkClase;
 
-    @Column(name = "json_ejemplo",columnDefinition = "TEXT")
+    @Column(name = "json_ejemplo")
     private String jsonEjemplo;
 
-    @Lob
+    @Column(name = "ejemplos_codigo",columnDefinition = "TEXT")
     private String ejemplosCodigo;
 }
